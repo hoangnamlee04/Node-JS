@@ -3,8 +3,19 @@ import Book from '../models/bookmodel.js';
 class BookController {
     // GET /books
     async getAllBooks(req, res) {
-        const books = await Book.find();
-        res.status(200).json(books);
+        try {
+            const books = await Book.find({});
+            res.status(200).json({
+                message: "GET OK",
+                data: books,
+            });
+        }
+        catch (error) {
+            res.status(400).json({
+                message: error.message,
+            });
+        }
+
     }
 
     // GET /books/:id
