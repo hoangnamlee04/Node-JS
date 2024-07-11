@@ -50,7 +50,9 @@ class BookController {
 
     async updateBook(req, res) {
         try {
-            const book = await Book.findByIdAndUpdate(req.params.id);
+            const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
+                new: true,
+            });
             if (!book) {
                 return res.status(404).json({
                     message: "Not Found",
